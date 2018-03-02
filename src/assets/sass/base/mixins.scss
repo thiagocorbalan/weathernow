@@ -1,0 +1,31 @@
+//
+//  Mixins
+//  
+//  @project    WeatherApp
+//  @package    base
+//  @author     Thiago Corbalan
+//
+//
+
+
+@mixin cross-browser($property, $value){
+    -webkit-#{$property}: $value;
+    -moz-#{$property}: $value;
+    #{$property}: $value;
+}
+
+@mixin border-radius($border-radius: $radius-base ){
+    @include cross-browser(border-radius, $border-radius);
+}
+
+@mixin box-shadow($value){
+    @include cross-browser(box-shadow, $value);
+}
+@mixin box-sizing(){
+    @include cross-browser(box-sizing, border-box);
+}
+
+// @mixin font-size($sizeValue, $sizebase: $font-size-base) {
+//     $s: unit($sizeValue) * unit($sizebase);   
+//     font-size: #{$s}px;
+// }

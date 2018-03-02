@@ -1,0 +1,38 @@
+//
+//  Header
+//  
+//  @project    WeatherApp
+//  @package    layout
+//  @section    header
+//  @author     Thiago Corbalan
+//
+
+.app-wea{
+
+    .container{
+        padding-top: 54px;
+    }
+    
+    header{
+        position: fixed;
+        display: block;
+        top: 0;
+        width: 100%;
+        left: 0;
+        background: $color-white;
+        height: 54px;
+        line-height: 64px;
+        box-shadow: 0 2px $color-gray-30; 
+
+        .wea-logo{
+            position: absolute;
+            left: 50%;
+            margin: -82px;
+            display: block;
+            top: 50%;
+            margin-top: -12px;
+
+            @include border-radius();
+        }
+    }    
+}

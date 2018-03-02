@@ -1,0 +1,22 @@
+//  
+//  WeatherApp
+//  
+//  @project    WeatherApp
+//  @package    main
+//  @author     Thiago Corbalan
+
+// Base
+@import "base/normalize";
+@import "base/colors";
+@import "base/variables";
+@import "base/mixins";
+
+// Layout
+@import "layout/global.scss";
+@import "layout/header.scss";
+
+// Modules
+@import "module/card-weather";
+
+// Pages
+@import "pages/index";

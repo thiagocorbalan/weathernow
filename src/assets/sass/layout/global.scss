@@ -1,0 +1,25 @@
+//
+//  Global
+//  
+//  @project    WeatherApp
+//  @package    layout
+//  @section    global
+//  @author     Thiago Corbalan
+//
+
+*{
+    @include box-sizing();
+}
+
+body{    
+    font-family: $font-family; 
+    background: $color-gray-20;
+    color: $color-gray-50;
+}
+
+sub { 
+    bottom: initial;
+}
+sup{
+    top: -0.3em;
+}

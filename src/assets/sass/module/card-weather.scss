@@ -1,0 +1,84 @@
+//
+//  Card Weather Component
+//  
+//  @project    WeatherApp
+//  @package    module
+//  @section    card weather
+//  @author     Thiago Corbalan
+//
+
+
+%layout-footer{
+    background: rgba($color-gray-20,.5);
+    padding: 10px;
+    margin: 10px -10px -10px;
+}
+
+.wea-card{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    margin: 0 25px;
+    background: $color-white;
+    padding: 10px;
+    width: 250px; 
+    user-select: none;
+
+    @include border-radius();
+    @include box-shadow(2px 2px 8px $color-gray-40);
+
+    // City Name
+    .wea-card__city-name{
+        margin: -10px -10px 10px;
+        line-height: 44px;
+        border-bottom: 2px solid $color-gray-20;
+        font-size: 18px;
+    }
+    .wea-card__data {
+        font-size: 0;
+
+        > [class^=wea-card__]{
+            font-size: 16px;
+            display: inline-block;
+            width: 50%;
+
+            .label{
+                text-transform: uppercase;
+                color: $color-gray-10;
+                font-size: 11px;
+                display: block;
+                margin-bottom: 5px; 
+            }
+
+            .data{
+                font-weight: 600;
+
+                sub{ font-weight: normal;}
+            }
+        }
+    }
+
+
+    .wea-card__data{
+        @extend %layout-footer;        
+        display: none;
+    }
+    .wea-card__temp{
+        font-size: 90px;
+        color: $color-yellow;
+        margin: 20px 0;
+
+        &.wea-card__temp--status-hot{color: $color-pink;}
+        &.wea-card__temp--status-cold{color: $color-blue;}
+    }
+
+    .wea-card__updated{
+        font-size: 11px;
+        color: $color-gray-10;
+        @extend %layout-footer;
+    } 
+
+    &.wea-card--status-active{
+        .wea-card__data{ display: block; }
+    }
+} 
