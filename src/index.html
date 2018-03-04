@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WeatherNow</title>
-    <link rel="icon" href="./favicon_32x32.png" />
-    <link href="./../dist/css/weather.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="./assets/images/favicon_32x32.png" />
+    <link href="./assets/css/weather.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="app-wea">
@@ -19,65 +19,12 @@
 
 
             <!-- CONTENT -->
-            <div class="main-content">
-                
-                <div class="wea-card">
-                    <div class="wea-card__city-name">Urubici, BR</div>
-                    <div class="wea-card__temp"> 19<sup>º</sup></div>
-
-                    <div class="wea-card__data">
-                        <div class="wea-card__data--humidity">
-                            <div class="label">Humidity</div>
-                            <div class="data">75<sub>%</sub></div>
-                        </div>
-                        <div class="wea-card__data--pressure">
-                            <div class="label">Pressure</div>
-                            <div class="data">892<sub>hpa</sub></div>
-                        </div>
-                    </div>
-                    <div class="wea-card__updated"> Updated at 02:48:32 PM </div>
-                    
-                </div>
-
-                <div class="wea-card wea-card--status-active">
-                    <div class="wea-card__city-name">Nairobi, KE</div>
-                    <div class="wea-card__temp wea-card__temp--status-hot"> 31<sup>º</sup></div>
-
-                    <div class="wea-card__data">
-                        <div class="wea-card__data--humidity">
-                            <div class="label">Humidity</div>
-                            <div class="data">75<sub>%</sub></div>
-                        </div>
-                        <div class="wea-card__data--pressure">
-                            <div class="label">Pressure</div>
-                            <div class="data">892<sub>hpa</sub></div>
-                        </div>
-                    </div>
-                    <div class="wea-card__updated"> Updated at 02:48:32 PM </div>
-                    
-                </div>
-
-                <div class="wea-card">
-                    <div class="wea-card__city-name">Nuuk, GL</div>
-                    <div class="wea-card__temp wea-card__temp--status-cold"> -4<sup>º</sup></div>
-
-                    <div class="wea-card__data">
-                        <div class="wea-card__data--humidity">
-                            <div class="label">Humidity</div>
-                            <div class="data">75<sub>%</sub></div>
-                        </div>
-                        <div class="wea-card__data--pressure">
-                            <div class="label">Pressure</div>
-                            <div class="data">892<sub>hpa</sub></div>
-                        </div>
-                    </div>
-                    <div class="wea-card__updated"> Updated at 02:48:32 PM </div>
-                    
-                </div>
-
-            </div>
+            <div id="weaContainer" class="main-content"></div>
         </div>
     </div>
+    
+
+    <script src="js/App.js"></script>
 
 </body>
 </html>
