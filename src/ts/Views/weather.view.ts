@@ -9,7 +9,7 @@ export class WeatherView{
 
     template(model){
         return model._weathers.map((n:WeatherModel)=>{            
-            return `<div class="wea-card wea-card--status-active">
+            return `<div class="wea-card">
                 <div class="wea-card__city-name">${n.city}, ${n.country}</div>
                 <div class="wea-card__temp ${n.cssClassTemp}"> ${n.temp}<sup>º</sup></div>
 
@@ -31,8 +31,19 @@ export class WeatherView{
 
     public update(model){
         this.__container.innerHTML = this.template(model);
+
+        let x = <Node[]><any>this.__container.querySelectorAll('.wea-card');
+        x.forEach(element =>  element.addEventListener('click', ()=> this.toogleActive(element)) );
     }
 
+    public toogleActive(element:Node){
+        const el = (<HTMLElement>element).classList;
+        const classCssActive = 'wea-card--status-active';
 
-    
+        if(!el.contains(classCssActive)){
+            el.add(classCssActive);            
+        }else{
+            el.remove(classCssActive);
+        }
+    }
 }

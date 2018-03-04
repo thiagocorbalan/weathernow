@@ -18,7 +18,7 @@ export class WeatherController{
         this._weatherView = new WeatherView(this.weaContainer);
 
         // Atuliza sozinho
-        this.api.get(`group?id=${CitiesEnum.Nuuk},3448439,${CitiesEnum.Urubici},${CitiesEnum.Nairobi}&units=weather`,(x) => {
+        this.api.get(`group?id=${CitiesEnum.Nuuk},${CitiesEnum.SaoPaulo},${CitiesEnum.Urubici},${CitiesEnum.Nairobi}&units=weather`,(x) => {
             JSON.parse(x).list.map( r => {
                 this._listWeathers.setWeathers( new Weather(r.name, r.sys.country, r.main.temp, r.main.pressure, r.main.humidity) );
             });
