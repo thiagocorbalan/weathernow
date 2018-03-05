@@ -59,7 +59,7 @@ export class Weather {
 
             if(r.cod == 200){
                 this.id = r.id;
-                this.country = `, ${r.sys.country}`;
+                this.country = r.sys.country;
                 this.buildWeather(r);
                 this.__cacheService.add(r);
             }
