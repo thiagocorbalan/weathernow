@@ -1,26 +1,28 @@
-import { WeatherModel } from '../Models/weather.model';
+import { CLASS_WEA_ACTIVE } from '../Helpers/Constants';
+import { WeatherModel } from '../Models/Weather.model';
+import { ListWeathers } from '../Models/listWeathers.model';
 
-export class WeatherView{
-    private __container:HTMLElement;
+export abstract class WeaView{
+    private static __container:HTMLElement =  document.querySelector('#weaContainer');
 
-    constructor(container){
-        this.__container = container;
-    }
-
-    template(model){
-        return model._weathers.map((n:WeatherModel)=>{            
-            return `<div class="wea-card">
-                <div class="wea-card__city-name">${n.city}, ${n.country}</div>
+    /**
+     * Create the wether template
+     * @param model 
+     */
+    public static template(model){
+        return model.map((n:WeatherModel)=>{
+            return `<div id="${n.id}" class="wea-card ${n.cssClassStatus}" >
+                <div class="wea-card__city-name">${n.name}${n.country}</div>
                 <div class="wea-card__temp ${n.cssClassTemp}"> ${n.temp}<sup>º</sup></div>
 
                 <div class="wea-card__data">
                     <div class="wea-card__data--humidity">
-                        <div class="label">Humidit</div>
-                        <div class="data">${n.hum}<sub>%</sub></div>
+                        <div class="label">Humidity</div>
+                        <div class="data">${n.humidity}<sub>%</sub></div>
                     </div>
                     <div class="wea-card__data--pressure">
                         <div class="label">Pressure</div>
-                        <div class="data">${n.press}<sub>hpa</sub></div>
+                        <div class="data">${n.pressure}<sub>hPa</sub></div>
                     </div>
                 </div>
                 <div class="wea-card__updated"> Updated at ${n.dateUpdate} </div>
@@ -29,21 +31,11 @@ export class WeatherView{
         }).join('');
     }
 
-    public update(model){
-        this.__container.innerHTML = this.template(model);
-
-        let x = <Node[]><any>this.__container.querySelectorAll('.wea-card');
-        x.forEach(element =>  element.addEventListener('click', ()=> this.toogleActive(element)) );
-    }
-
-    public toogleActive(element:Node){
-        const el = (<HTMLElement>element).classList;
-        const classCssActive = 'wea-card--status-active';
-
-        if(!el.contains(classCssActive)){
-            el.add(classCssActive);            
-        }else{
-            el.remove(classCssActive);
-        }
+    /**
+     * Update View with list
+     * @param model 
+     */
+    public static update(model){
+        WeaView.__container.innerHTML = WeaView.template(model);
     }
 }

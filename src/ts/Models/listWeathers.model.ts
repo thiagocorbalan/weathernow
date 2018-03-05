@@ -1,21 +1,30 @@
-import { WeatherModel } from "./weather.model";
+import { WeatherModel } from './Weather.model';
 
-export class ListWeathers{
-    private _weathers: Array<WeatherModel>;
+export abstract class ListWeathers{
+    static itens: Array<WeatherModel> = [];
 
     constructor(){
-        this._weathers = [];
+        ListWeathers.itens = [];
     }
 
-    setWeathers(weather:WeatherModel){
-        this._weathers.push(weather);
+    public static add(weather:WeatherModel){
+        ListWeathers.itens.push(weather);
     }
 
-    getWeathers():Array<WeatherModel>{
-        return this._weathers;
+    public static remove(name:string){
+        let index = ListWeathers.find(name);
+        ListWeathers.itens.splice(index,1);
     }
 
-    clear():void{
-        this._weathers = [];
+    public static update(name, data){
+        ListWeathers.itens[ListWeathers.find(name)] = data;
+    }
+
+    public static clear():void{
+        ListWeathers.itens = [];
+    }
+
+    public static find(name:string):number{
+        return ListWeathers.itens.map(x=>x.name).indexOf(name);
     }
 }

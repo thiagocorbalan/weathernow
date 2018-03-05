@@ -1,10 +1,11 @@
 export class WeatherModel {
-    city:string;
+    id:number;
+    name:string;
     country:string;
     temp:number;
-    press:number;
-    hum:number;
+    pressure:number;
+    humidity:number;
     dateUpdate:string;
     cssClassTemp: string;
-    active:boolean;
+    cssClassStatus:string;
 }
