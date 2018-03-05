@@ -7,7 +7,7 @@ export class CacheService implements CacheInterface{
      * @param model 
      */
     public add(model){
-        localStorage.setItem(`WEA${this.removeWhiteSpaces(model.name)}`, JSON.stringify(model));
+        localStorage.setItem(this.buildKeyCache(model), JSON.stringify(model));
     }
 
     /**
@@ -15,7 +15,7 @@ export class CacheService implements CacheInterface{
      * @param model 
      */
     public remove(model){
-        localStorage.removeItem(`WEA${this.removeWhiteSpaces(model.name)}`);
+        localStorage.removeItem(this.buildKeyCache(model));
     }
 
     /**
@@ -23,7 +23,7 @@ export class CacheService implements CacheInterface{
      * @param model 
      */
     public update(model){
-        localStorage[`WEA${this.removeWhiteSpaces(model.name)}`] = model;
+        localStorage[this.buildKeyCache(model)] = model;
     }
 
     /**
@@ -31,15 +31,25 @@ export class CacheService implements CacheInterface{
      * @param model 
      */
     public getData(model){
-        return JSON.parse(localStorage[`WEA${this.removeWhiteSpaces(model.name)}`]);
+        let itemCache = localStorage[this.buildKeyCache( model )];
+        return  itemCache ? JSON.parse(itemCache) : null;
+    }
+
+    public getDataItem(key:string){
+        return JSON.parse(localStorage[this.buildKeyCache(key)]);
+    }
+
+    public hasCache(key:string):boolean{
+        return localStorage[this.buildKeyCache(key)] != undefined;
     }
 
     /**
      * Remove White Spaces
      * @param text 
      */
-    private removeWhiteSpaces(text:string){
-        return text.replace(/\s+/g,'');
+    private buildKeyCache(model){
+        return `WEA${model.name.toLowerCase().replace(/\s+/,'') }`;
     }
+    
 
 }

@@ -1,8 +1,6 @@
 'use strict';
 
 const gulp          = require('gulp');
-const ts            = require("gulp-typescript");
-//const tsProject     = ts.createProject("tsconfig.json");
 const sass          = require('gulp-sass');
 const imagemin      = require('gulp-imagemin');
 const rimraf        = require('rimraf');
@@ -83,10 +81,10 @@ gulp.task('ts', function()
 		.bundle()
 		.pipe(source('App.js'))
         .pipe(buffer())
-        .pipe(uglify({
-            toplevel: false,
-            ie8: true
-        }))
+        // .pipe(uglify({
+        //     toplevel: false,
+        //     ie8: true
+        // }))
         .pipe(gulp.dest(path.DIST_JS))
         .pipe(browserSync.reload({
             stream: true

@@ -1,4 +1,4 @@
-import { CLASS_TEMP_HOT, CLASS_TEMP_COLD, CLASS_WEA_SPINNER } from "../Helpers/Constants";
+import { CLASS_TEMP_HOT, CLASS_TEMP_COLD, CLASS_WEA_SPINNER, CLASS_WEA_ERROR } from "../Helpers/Constants";
 import { WeaView } from "../Views/Weather.view";
 import { ListWeathers } from "../Models/listWeathers.model";
 import { WeatherModel } from "../Models/Weather.model";
@@ -35,7 +35,7 @@ export class WeatherService implements WeatherInterface{
     /** 
      * Add Spinner
     */
-    public addSpinner(model:WeatherModel):void{
+    public addSpinner(model:WeatherModel){
         model.cssClassStatus = CLASS_WEA_SPINNER;
         WeaView.update(ListWeathers.itens);
     }
@@ -43,7 +43,16 @@ export class WeatherService implements WeatherInterface{
     /** 
      * Remove Spinner
     */
-    public removeSpinner(model:WeatherModel):void{
+    public removeSpinner(model:WeatherModel){
+        model.cssClassStatus = '';
+        WeaView.update(ListWeathers.itens);
+    }
+
+    public addMessageError(model:WeatherModel){
+        model.cssClassStatus = CLASS_WEA_ERROR;
+        WeaView.update(ListWeathers.itens);
+    }
+    public removeMessageError(model:WeatherModel){
         model.cssClassStatus = '';
         WeaView.update(ListWeathers.itens);
     }

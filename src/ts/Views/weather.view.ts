@@ -10,9 +10,12 @@ export abstract class WeaView{
      * @param model 
      */
     public static template(model){
+
+        //console.log('template',model);
+
         return model.map((n:WeatherModel)=>{
             return `<div id="${n.id}" class="wea-card ${n.cssClassStatus}" >
-                <div class="wea-card__city-name">${n.name}${n.country}</div>
+                <div class="wea-card__city-name">${n.name}${n.country ? `, ${n.country}` : ''}</div>
                 <div class="wea-card__temp ${n.cssClassTemp}"> ${n.temp}<sup>º</sup></div>
 
                 <div class="wea-card__data">

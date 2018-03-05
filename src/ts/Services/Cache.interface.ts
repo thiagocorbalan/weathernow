@@ -3,4 +3,5 @@ export interface CacheInterface{
     remove(model);
     update(model);
     getData(model);
+    hasCache(key);
 }

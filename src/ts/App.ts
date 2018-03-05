@@ -10,3 +10,4 @@ $('#formAdd').onsubmit = (ev)=>{
     weaController.create(textField.value);
     textField.value = '';
 };
+

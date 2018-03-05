@@ -1,4 +1,5 @@
 import { WeatherModel } from './Weather.model';
+import { CacheService } from '../Services/Cache.service';
 
 export abstract class ListWeathers{
     static itens: Array<WeatherModel> = [];
@@ -26,5 +27,11 @@ export abstract class ListWeathers{
 
     public static find(name:string):number{
         return ListWeathers.itens.map(x=>x.name).indexOf(name);
+    }
+
+    public static contains(model):boolean{
+        const __cacheService = new CacheService();
+        return __cacheService.getData(model) && ListWeathers.find(__cacheService.getData(model).name) < 0;
+
     }
 }

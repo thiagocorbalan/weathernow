@@ -6,4 +6,6 @@ export interface WeatherInterface{
     setdateUpdate():string;
     removeSpinner(model:WeatherModel):void;
     addSpinner(model:WeatherModel):void;
+    addMessageError(model:WeatherModel):void;
+    removeMessageError(model:WeatherModel):void;
 }
