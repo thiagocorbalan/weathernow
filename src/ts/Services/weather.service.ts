@@ -29,8 +29,7 @@ export class WeatherService implements WeatherInterface{
      * Convert Date Now format Hour:Minutes:Seconds
      */
     public setdateUpdate():string{
-        let hour = new Date();
-        return `${hour.getHours()}:${hour.getMinutes()}:${hour.getSeconds()}`;
+        return new Date().toLocaleTimeString('en-US');
     }
 
     /** 
