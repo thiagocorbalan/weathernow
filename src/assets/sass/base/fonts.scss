@@ -1,0 +1,5 @@
+@import './mixins';
+
+@include font-face("Helvetica", "Helvetica-light", $font-weight:300);
+@include font-face("Helvetica", "Helvetica-Normal", $font-weight:400);
+@include font-face("Helvetica", "Helvetica Bold", $font-weight:800);

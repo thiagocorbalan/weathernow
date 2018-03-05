@@ -20,12 +20,14 @@ const path = {
     DIST_CSS:   './dist/assets/css',
     DIST_IMG:   './dist/assets/images',
     DIST_JS:    './dist/js',
+    DIST_FONTS: './dist/assets/fonts',
     SRC_INDEX:  './src',
     SRC_SASS:   './src/assets/sass/**/*.scss',
     SRC_TS:     './src/ts/**/*.ts',
     SRC_IMG:    './src/assets/images',
+    SRC_FONTS:  './src/assets/fonts',
     ENTRY_SASS: './src/assets/sass/weather.scss',
-    ENTRY_TS: './src/ts/App.ts'
+    ENTRY_TS:   './src/ts/App.ts'
 }
 
 // BrowserSync
@@ -81,14 +83,20 @@ gulp.task('ts', function()
 		.bundle()
 		.pipe(source('App.js'))
         .pipe(buffer())
-        // .pipe(uglify({
-        //     toplevel: false,
-        //     ie8: true
-        // }))
+        .pipe(uglify({
+            toplevel: false,
+            ie8: true
+        }))
         .pipe(gulp.dest(path.DIST_JS))
         .pipe(browserSync.reload({
             stream: true
         }));
+});
+
+// Fonts
+gulp.task('fonts', function () {
+    return gulp.src([`${path.SRC_FONTS}/*.{ttf,woff,eot,svg}`])
+        .pipe(gulp.dest(path.DIST_FONTS));
 });
 
 
@@ -103,5 +111,5 @@ gulp.task("html", function(){
 });
 
 
-gulp.task('start',['html','images','sass','ts','watch']);
+gulp.task('start',['html','images','sass','ts','fonts','watch']);
 gulp.task('start:dev',['start','watch']);

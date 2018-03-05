@@ -25,7 +25,24 @@
     @include cross-browser(box-sizing, border-box);
 }
 
-// @mixin font-size($sizeValue, $sizebase: $font-size-base) {
-//     $s: unit($sizeValue) * unit($sizebase);   
-//     font-size: #{$s}px;
-// }
+@mixin font-face(
+    $font-name, // Nome da fonte
+    $font-file-name, // Nome do arquivo da fonte
+    $font-weight: normal, // Larguda da fonte (normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900|initial|inherit)
+    $font-style:normal, // Estilo da fonte (normal|italic|oblique|initial|inherit)
+    $font-url:  '../fonts/', // Url padrão de onde estão loicalizadas as fontes
+    $font-path: "" // Pasta da fonte
+    ){
+        $svg-id: replace($font-file-name,"-","_");
+
+        @font-face {
+            font-family: $font-name;
+            src: url('#{$font-url}#{$font-path}#{$font-file-name}.otf');
+            src: url('#{$font-url}#{$font-path}#{$font-file-name}.woff') format('woff'),
+                 url('#{$font-url}#{$font-path}#{$font-file-name}.ttf') format('truetype'),
+                 url('#{$font-url}#{$font-path}#{$font-file-name}.svg#${svg-id}') format('svg');
+            font-weight: $font-weight;
+            font-style: $font-style;
+        }
+}
+
