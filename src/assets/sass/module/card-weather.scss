@@ -36,6 +36,7 @@
         line-height: 44px;
         border-bottom: 2px solid $color-gray-20;
         font-size: 18px;
+        font-weight: 300;
     }
     .wea-card__data {
         font-size: 0;
@@ -101,7 +102,6 @@
         @extend %layout-footer;
     } 
 
-    &:hover{cursor: pointer;}
     &:hover, 
     &.wea-card--status-active{
         .wea-card__data{

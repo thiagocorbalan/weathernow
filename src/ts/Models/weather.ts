@@ -4,6 +4,8 @@ import { WeatherService } from '../Services/Weather.service';
 import { ApiService } from './../Services/api.service';
 import { WeaView } from './../Views/Weather.view';
 import { ListWeathers } from './listWeathers.model';
+import { CacheService } from '../Services/Cache.service';
+import { CacheInterface } from '../Services/Cache.interface';
 
 export class Weather {
     public id: number;
@@ -18,6 +20,7 @@ export class Weather {
     private __api:ApiService;
     private __timer:any;
     private __weatherService:WeatherInterface;
+    private __cacheService:CacheInterface;
 
     constructor(name){
         this.name = name;
@@ -32,39 +35,48 @@ export class Weather {
 
         this.__api = new ApiService();
         this.__weatherService = new WeatherService();
+        this.__cacheService = new CacheService();
         this.getInitialData();
 
-        //this.__timer = setInterval( ()=>{ this.update(); }, 600000 );
-        
+        this.__timer = setInterval( () => {
+            this.updateData();
+        },600000);
     }
 
     /** 
      * Get with initials Data
     */
     private getInitialData(){
-        this.__weatherService.addSpinner(this);        
-        this.__api.get(`weather?q=${this.name}`, (x)=>{
-            let r = JSON.parse(x);
-            if(r.cod == 200){
-                this.id = r.id;
-                this.country = `, ${r.sys.country}`;
-            }
-            this.buildData(r);
-        });
-        
+        this.__weatherService.addSpinner(this);
+        if(localStorage[`WEA${this.name.replace(/\s+/g,'')}`] == undefined){
+            console.info("Gets data in the API");
+            this.__api.get(`weather?q=${this.name}`, (x)=>{
+                let r = JSON.parse(x);
+                if(r.cod == 200){
+                    this.id = r.id;
+                    this.country = `, ${r.sys.country}`;
+                }
+                this.buildData(r); 
+                this.__cacheService.add(r);
+            });
+        }else{
+            console.info("Gets data in the Cached");
+            let cacheValue = this.__cacheService.getData(this);
+            this.buildData(cacheValue); 
+        }
     }
 
     /** 
      * Update Data Weather
     */
-    private update(){
-        this.__weatherService.addSpinner(this);
-        setTimeout( ()=>{
-            this.__api.get(`weather?q=${this.name}`, (x)=>{
-                let r = JSON.parse(x);
-                this.buildData(r);
-            });
-        },1000);
+    private updateData(){
+        this.__weatherService.addSpinner(this);    
+        this.__api.get(`weather?q=${this.name}`, (x)=>{
+            let r = JSON.parse(x);
+            this.buildData(r);
+            this.__cacheService.update(this);
+        });
+        
     }
 
     /**
@@ -82,6 +94,7 @@ export class Weather {
         }else if(parseInt(r.cod) == 404){
             this.cssClassStatus = CLASS_WEA_ERROR;
             clearInterval(this.__timer);
+            this.__cacheService.remove(this);
             
             // this.__timer = setTimeout( ()=> {
             //     ListWeathers.remove(this.name);
