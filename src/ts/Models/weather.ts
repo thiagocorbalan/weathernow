@@ -28,11 +28,6 @@ export class Weather {
         this.__cacheService = new CacheService();
 
         this.name = name;
-        // this.id = 0;
-        // this.country = '';
-        // this.pressure = 0;
-        // this.humidity = 0;
-        // this.temp = 0;
 
         if(this.__cacheService.hasCache(this)){
             this.getCache();
