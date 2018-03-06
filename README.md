@@ -10,10 +10,8 @@ Initially is preload three cities: **Urubici-BR**, **Nairobi-KE** and **Nuuk-GL*
 * [Google Chrome](https://www.google.com.br/intl/pt-BR/chrome/)
 
 ## How to run
-The below command will install all packages needed and will automatically initialize the project.
-``` 
-npm start
-```
+1. First download this project.
+1. Run this command `npm start` on Prompt Command for to install all packages needed. Ready! This command will automatically initialize the App.
 ## Built With
 * [Browserify](http://browserify.org/) - For used to write better th modules.
 * [Browsersync](https://browsersync.io/) - Used to build the project without the necessary reloading browser.
@@ -25,4 +23,4 @@ npm start
 
 * Field to add weather conditions of more cities.
 
-## Thank's :) 
+### Thank's :) 
