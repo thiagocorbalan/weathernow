@@ -1,4 +1,8 @@
-import { CacheInterface } from "./Cache.interface";
+import { WeatherResultModel } from '../Models/WeatherResult.model';
+import { CacheInterface } from './Cache.interface';
+import { TIME_EXPIRE_CACHE } from '../Helpers/Constants';
+import { TextHelper } from '../Helpers/TextHelper';
+import { WeatherModel } from '../Models/Weather.model';
 
 export class CacheService implements CacheInterface{
 
@@ -6,50 +10,49 @@ export class CacheService implements CacheInterface{
      * Add data in the LocalStorage
      * @param model 
      */
-    public add(model){
-        localStorage.setItem(this.buildKeyCache(model), JSON.stringify(model));
+    public add(key:string,model:WeatherResultModel){
+        var dateTime = new Date();
+        model.dateExpire = dateTime.setMinutes(dateTime.getMinutes()+TIME_EXPIRE_CACHE); //TIME_EXPIRE
+        model.dateUpdate = new Date().toLocaleString();
+        model.keyCache = key;
+        localStorage.setItem(key, JSON.stringify(model));
     }
 
     /**
      * Remove data in the LocalStorage
      * @param model 
      */
-    public remove(model){
-        localStorage.removeItem(this.buildKeyCache(model));
+    public remove(key:string){
+        localStorage.removeItem(key);
     }
 
     /**
      * Update data in the LocalStorage
      * @param model 
      */
-    public update(model){
-        localStorage[this.buildKeyCache(model)] = model;
+    public update(model:WeatherResultModel){
+        localStorage[model.keyCache] = JSON.stringify(model);
     }
 
     /**
      * Get Data in the Local Storage
      * @param model 
      */
-    public getData(model){
-        let itemCache = localStorage[this.buildKeyCache( model )];
+    public getData(key:string){
+        const itemCache = localStorage[key];
         return  itemCache ? JSON.parse(itemCache) : null;
     }
 
     public getDataItem(key:string){
-        return JSON.parse(localStorage[this.buildKeyCache(key)]);
+        return JSON.parse(localStorage[key]);
     }
 
     public hasCache(key:string):boolean{
-        return localStorage[this.buildKeyCache(key)] != undefined;
+        const itemCache = localStorage[key];
+        if(itemCache){
+            return (<WeatherResultModel>JSON.parse(itemCache)).dateExpire >= new Date().getTime();
+        }else{
+            return false;
+        }
     }
-
-    /**
-     * Remove White Spaces
-     * @param text 
-     */
-    private buildKeyCache(model){
-        return `WEA${model.name.toLowerCase().replace(/\s+/,'') }`;
-    }
-    
-
 }

@@ -3,6 +3,7 @@ import { WeaView } from "../Views/Weather.view";
 import { ListWeathers } from "../Models/listWeathers.model";
 import { WeatherModel } from "../Models/Weather.model";
 import { WeatherInterface } from "./Weather.interface";
+import { WeatherResultModel } from "../Models/WeatherResult.model";
 
 export class WeatherService implements WeatherInterface{
 
@@ -22,6 +23,8 @@ export class WeatherService implements WeatherInterface{
             return CLASS_TEMP_COLD;    
         }else if(temp > 25){
             return CLASS_TEMP_HOT;
+        }else{
+            return '';
         }
     }
 
@@ -35,7 +38,7 @@ export class WeatherService implements WeatherInterface{
     /** 
      * Add Spinner
     */
-    public addSpinner(model:WeatherModel){
+    public addSpinner(model:WeatherResultModel){
         model.cssClassStatus = CLASS_WEA_SPINNER;
         WeaView.update(ListWeathers.itens);
     }
@@ -43,17 +46,17 @@ export class WeatherService implements WeatherInterface{
     /** 
      * Remove Spinner
     */
-    public removeSpinner(model:WeatherModel){
+    public removeSpinner(model:WeatherResultModel){
         model.cssClassStatus = '';
         WeaView.update(ListWeathers.itens);
     }
 
-    public addMessageError(model:WeatherModel){
-        model.cssClassStatus = CLASS_WEA_ERROR;
+    public addMessageError(model:WeatherResultModel){
+        model.cssClassStatusError = CLASS_WEA_ERROR;
         WeaView.update(ListWeathers.itens);
     }
-    public removeMessageError(model:WeatherModel){
-        model.cssClassStatus = '';
+    public removeMessageError(model:WeatherResultModel){
+        model.cssClassStatusError = '';
         WeaView.update(ListWeathers.itens);
     }
 }

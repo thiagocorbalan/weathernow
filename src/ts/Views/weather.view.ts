@@ -1,14 +1,17 @@
+import {WeatherService} from '../Services/weather.service';
 import { CLASS_WEA_ACTIVE, CLASS_WEA_SPINNER } from '../Helpers/Constants';
 import { WeatherModel } from '../Models/Weather.model';
 import { ListWeathers } from '../Models/listWeathers.model';
 import { WeatherResultModel } from '../Models/WeatherResult.model';
 import { ApiInterface } from '../Services/api.interface';
 import { ApiService } from '../Services/api.service';
+import { CacheService } from '../Services/Cache.service';
 
 export abstract class WeaView{
     
     private static __api: ApiInterface = new ApiService();
     private static __weatherService: WeatherService = new WeatherService();
+    private static __cacheService: CacheService = new CacheService();
     private static __container:HTMLElement =  document.querySelector('#weaContainer');
 
     /**
@@ -100,8 +103,10 @@ export abstract class WeaView{
                     let r:WeatherResultModel = JSON.parse(result);
                     r.main.temp = this.__weatherService.convertKelvinToCelcius(r.main.temp);
                     r.cssClassTemp = this.__weatherService.appliesCssClassTemp(r.main.temp);
+                    r.dateUpdate = new Date().toString();
 
-                    ListWeathers.update(keyCache,JSON.parse(result));
+                    ListWeathers.update(keyCache,r);
+                    WeaView.__cacheService.add(keyCache,r);
                     
                     // Remove spinner
                     //el.classList.remove(CLASS_WEA_SPINNER);

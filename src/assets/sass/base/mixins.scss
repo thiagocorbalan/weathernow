@@ -46,3 +46,8 @@
         }
 }
 
+@mixin transition($transition){
+    -webki-transition: $transition;
+    -moz-transition: $transition;
+    transition: $transition;
+}

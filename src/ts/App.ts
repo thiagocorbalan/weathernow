@@ -7,7 +7,7 @@ let $ = document.querySelector.bind(document);
 $('#formAdd').onsubmit = (ev)=>{
     ev.preventDefault();
     var textField = $('input[name=textField]');
-    weaController.create(textField.value);
+    weaController.create(textField.value,true);
     textField.value = '';
 };
 

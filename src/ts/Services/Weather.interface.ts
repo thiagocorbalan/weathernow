@@ -1,11 +1,11 @@
-import { WeatherModel } from "../Models/Weather.model";
+import { WeatherResultModel } from '../Models/WeatherResult.model';
 
 export interface WeatherInterface{
     convertKelvinToCelcius(temp:number):number;
-    appliesCssClassTemp(temp):string;
+    appliesCssClassTemp(temp:number):string;
     setdateUpdate():string;
-    removeSpinner(model:WeatherModel):void;
-    addSpinner(model:WeatherModel):void;
-    addMessageError(model:WeatherModel):void;
-    removeMessageError(model:WeatherModel):void;
+    removeSpinner(model:WeatherResultModel):void;
+    addSpinner(model:WeatherResultModel):void;
+    addMessageError(model:WeatherResultModel):void;
+    removeMessageError(model:WeatherResultModel):void;
 }

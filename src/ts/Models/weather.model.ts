@@ -6,6 +6,7 @@ export class WeatherModel {
     pressure:number;
     humidity:number;
     dateUpdate:string;
+    keyCache:string;
     cssClassTemp: string;
     cssClassStatus:string;
 }

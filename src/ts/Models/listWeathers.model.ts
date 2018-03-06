@@ -1,37 +1,38 @@
-import { WeatherModel } from './Weather.model';
 import { CacheService } from '../Services/Cache.service';
+import { WeatherModel } from './Weather.model';
+import { WeatherResultModel } from './WeatherResult.model';
 
 export abstract class ListWeathers{
-    static itens: Array<WeatherModel> = [];
+    static itens: Array<WeatherResultModel> = [];
 
     constructor(){
         ListWeathers.itens = [];
     }
 
-    public static add(weather:WeatherModel){
+    public static add(weather:WeatherResultModel){
         ListWeathers.itens.push(weather);
     }
 
-    public static remove(name:string){
-        let index = ListWeathers.find(name);
+    public static remove(key:string){
+        let index = ListWeathers.find(key);
         ListWeathers.itens.splice(index,1);
     }
 
-    public static update(name, data){
-        ListWeathers.itens[ListWeathers.find(name)] = data;
+    public static update(key:string, model:WeatherResultModel){
+        ListWeathers.itens[ListWeathers.find(key)] = model;
     }
 
     public static clear():void{
         ListWeathers.itens = [];
     }
 
-    public static find(name:string):number{
-        return ListWeathers.itens.map(x=>x.name).indexOf(name);
+    public static find(key:string):number{
+        return ListWeathers.itens.map(res=>res.keyCache).indexOf(key);
     }
 
-    public static contains(model):boolean{
+    public static contains(model:WeatherResultModel):boolean{
         const __cacheService = new CacheService();
-        return __cacheService.getData(model) && ListWeathers.find(__cacheService.getData(model).name) < 0;
-
+        const __getData = __cacheService.getData(model.keyCache);
+        return __getData && ListWeathers.find(__getData.name) < 0;
     }
 }

@@ -5,7 +5,7 @@ import { SysModel } from "./Sys.Model";
 import { CloudsModel } from "./Clouds.Model";
 
 export class WeatherResultModel{
-    cod:number;
+    cod:(number|string);
     id:number;
     dt:number;
     name:string;
@@ -17,4 +17,10 @@ export class WeatherResultModel{
     wind:{ speed:number };
     main:TempModel;
     sys: SysModel;
+    dateExpire: number;
+    dateUpdate: string;
+    keyCache:string;
+    cssClassStatus: string;
+    cssClassStatusError: string;
+    cssClassTemp: string;
 }

@@ -1,4 +1,4 @@
-import { CLASS_WEA_ERROR } from '../Helpers/Constants';
+import { CLASS_WEA_ERROR, TIME_UPDATE_WEATHER } from '../Helpers/Constants';
 import { WeatherInterface } from '../Services/Weather.interface';
 import { WeatherService } from '../Services/Weather.service';
 import { ApiService } from './../Services/api.service';
@@ -6,64 +6,61 @@ import { WeaView } from './../Views/Weather.view';
 import { ListWeathers } from './listWeathers.model';
 import { CacheService } from '../Services/Cache.service';
 import { CacheInterface } from '../Services/Cache.interface';
+import { WeatherModel } from './Weather.model';
+import { WeatherResultModel } from './WeatherResult.model';
+import { TextHelper } from '../Helpers/TextHelper';
+import { SysModel } from './Sys.Model';
+import { TempModel } from './Temp.model';
 
-export class Weather {
+export class Weather extends WeatherResultModel {
     public id: number;
     public name:string;
-    public country:string;
-    public temp:number;
-    public pressure:number;
-    public humidity:number;
-    public dateUpdate:string;    
-    public cssClassTemp: string;
-    public cssClassStatus:string;
+    public sys:SysModel;
+    public main:TempModel;
     private __api:ApiService;
     private __timer:any;
     private __weatherService:WeatherInterface;
     private __cacheService:CacheInterface;
 
-    constructor(name){
+    constructor(name, event:boolean = false){
+        super();
+
+        this.sys = new SysModel();
+        this.main = new TempModel();
         this.__api = new ApiService();
         this.__weatherService = new WeatherService();
         this.__cacheService = new CacheService();
 
         this.name = name;
-
-        if(this.__cacheService.hasCache(this)){
-            this.getCache();
-        }else{
-            this.getApi();
+        this.keyCache = `WEA${TextHelper.normalize(name)}`;
+        this.cssClassStatus = '';
+        this.cssClassTemp = '';
+        this.cssClassStatusError = '';
+        
+        if(ListWeathers.find(this.keyCache) < 0){
+            if(this.__cacheService.hasCache(this.keyCache)){
+                this.getCache();
+            }else{
+                this.getApi();
+            }
+        }else if(event){
+            alert(`Parece que essa cidade "${this.name}" já está sendo mostrada na tela`);            
         }
-
-        //if(this.__cacheService.getItem())
-        //console.log('this.name===>',this);
-        //console.log(!this.__cacheService.getData(this) && this.__cacheService.getData(this).name != this.name);
-
-        // if(!this.__cacheService.getData(this) && this.__cacheService.getData(this).name != this.name){            
-        //     ListWeathers.add(this);
-        //     WeaView.update(ListWeathers.itens);
-        // }
-        
-        // this.getInitialData();
-        
-        // this.__timer = setInterval( () => {
-        //     this.updateData();
-        // },600000);
     }
 
     private getApi(){
         console.log('%cGET_API','font-weight:600;color:purple;');
-        this.__api.get(`weather?q=${this.name}`, (result)=>{
-            
-            let r = JSON.parse(result);
-
+        this.__api.get(`weather?q=${this.name}`, (result)=>{            
+            let r:WeatherResultModel = JSON.parse(result);
             if(r.cod == 200){
                 this.id = r.id;
-                this.country = r.sys.country;
+                this.sys.country = r.sys.country;
+                this.name = r.name;
+                this.dateUpdate = new Date().toString();
                 this.buildWeather(r);
-                this.__cacheService.add(r);
+                this.__cacheService.add(this.keyCache,r);
             }
-            else if( parseInt(r.cod)== 404)
+            else if( parseInt(<string>r.cod)== 404)
             {
                 this.__weatherService.addMessageError(this);
             }
@@ -72,9 +69,11 @@ export class Weather {
 
     private getCache(){
         console.log('%cGET_CACHE','font-weight:600;color:blue;');
-        let cache = this.__cacheService.getData(this);
+        let cache = this.__cacheService.getData(this.keyCache);
         this.id = cache.id;
-        this.country = cache.sys.country;
+        this.name = cache.name;
+        this.sys.country = cache.sys.country;
+        this.dateUpdate = cache.dateUpdate;
         this.buildWeather(cache);
     }
 
@@ -82,30 +81,48 @@ export class Weather {
     /** 
      * Update Data Weather
     */
-    // private updateData(){
-    //     this.__weatherService.addSpinner(this);    
-    //     this.__api.get(`weather?q=${this.name}`, (x)=>{
-    //         let r = JSON.parse(x);
-    //         this.buildData(r);
-    //         this.__cacheService.update(this);
-    //     });
+    public updateData(){
+        this.__weatherService.addSpinner(this);
+
+        setTimeout(() => {
+            this.__api.get(`weather?q=${this.name}`, (result)=>{
+                let r:WeatherResultModel = JSON.parse(result);
+                if(r.cod == 200){
+                    console.log('%cUPDATE ITEM -> GET_API','font-weight:600;color:purple;');
+                    this.buildWeather(r,true);
+                    r.keyCache = this.keyCache;
+                    this.__cacheService.update(this);
+                }
+                else if( parseInt(<string>r.cod)== 404)
+                {
+                    this.__weatherService.addMessageError(this);
+                    clearInterval(this.__timer);
+                }
+                
+                ListWeathers.update(this.keyCache,this);
+                this.__weatherService.removeSpinner(this);
+            });
+        },1000);
         
-    // }
+        
+    }
 
     /**
      * Builds the weather
      * @param r 
      */
-    private buildWeather(data){
-        this.pressure = data.main.pressure;
-        this.humidity = data.main.humidity;
-        this.temp = this.__weatherService.convertKelvinToCelcius(data.main.temp);
-        //this.dateUpdate = this.__weatherService.setdateUpdate();
-        this.cssClassTemp = this.__weatherService.appliesCssClassTemp(this.temp);
-        //ListWeathers.update(this.name,this);
+    private buildWeather(data,update?){
+        this.main.pressure = data.main.pressure;
+        this.main.humidity = data.main.humidity;
+        this.main.temp = this.__weatherService.convertKelvinToCelcius(data.main.temp);
+        this.cssClassTemp = this.__weatherService.appliesCssClassTemp(this.main.temp);
 
-        ListWeathers.add(this);
-        WeaView.update(ListWeathers.itens);
+        if(!update){
+            ListWeathers.add(this);
+            WeaView.update(ListWeathers.itens);
+            this.__timer = setInterval( () => this.updateData() ,TIME_UPDATE_WEATHER );
+        }
+        
     }
 }
   

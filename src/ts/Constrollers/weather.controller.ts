@@ -7,7 +7,7 @@ export class WeatherController{
     private __cacheService = new CacheService();
 
     constructor(){
-        let urb = this.create('Urubici'); 
+        let urb = this.create('Urubici');
         let nuk = this.create('Nuuk');
         let nai = this.create('Nairobi');
 
@@ -15,13 +15,13 @@ export class WeatherController{
     }
 
     public create(name, active?:boolean){
-        return new Weather(name);
+        return new Weather(name,active);
     }
 
     private createWeatherCache(){
-        Object.keys(localStorage).forEach((key) => {
+        Object.keys(localStorage).forEach((key) => {            
             const dataModel = JSON.parse(localStorage[key]);
-            if(ListWeathers.contains(dataModel)){
+            if(dataModel && ListWeathers.contains(dataModel)){
                 this.create(dataModel.name);
             }
         });
