@@ -10,7 +10,8 @@ A weather app that show weather from various cities. Initially there are  three 
 
 ## How to run
 1. First download the project.
-1. Run the command `npm start` on Prompt Command to install all needed  packages. This command will automatically initialize the App.
+1. Run the command `npm start` on a Prompt Command Window to install all needed packages. This command will automatically initialize the App.
+   
 ## Built With
 * [Browserify](http://browserify.org/) - Used to write better the modules.
 * [Browsersync](https://browsersync.io/) - Used to build the project without reloading browser.
