@@ -1,13 +1,14 @@
-# WeatherNow-App
+# Weather Now App
 
 A simple weather app for the cities of **Urubici-BR**, **Nairobi-KE** and **Nuuk-GL**.
 
+![Logo of Weather App](/src/assets/images/screen.JPG)
 
-![Logo of Weather App](/src/assets/images/weathernow-logo.svg)
+## Prerequisites
 
-## Installation
 
+## Installing
+This command will install all packages needed to run rightly app.
 ``` 
 npm start
 ```
-This command will install all packages needed to run rightly app.
