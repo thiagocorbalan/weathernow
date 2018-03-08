@@ -63,6 +63,11 @@
 
                 sub{ font-weight: 300; font-size: 11px; margin-left: 2px;}
             }
+        } 
+
+        @media (max-width: $screen-sm){
+            height: 55px;
+            opacity: 1;
         }
     }
 
@@ -154,6 +159,7 @@
 
     @media (max-width: $screen-xs){
         margin: 0 10px 30px;
+        
     }
 }  
  

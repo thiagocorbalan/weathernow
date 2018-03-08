@@ -12,17 +12,17 @@
         display: flex;
         align-content: center;
         align-items: center;
-        justify-content: center;
+        justify-content: left;
         min-height: 600px;
         text-align: center;
         padding: 30px;
         top: 54px;
         height: calc(100% - 134px);
         
-        @media (max-width: $screen-xs){
+        @media (max-width: $screen-sm){
             min-height: auto;
 
-            .wea-container{
+            .wea-container{ 
                 width: auto !important;
                 position: static !important;
             }
