@@ -21,6 +21,11 @@
         
         @media (max-width: $screen-xs){
             min-height: auto;
+
+            .wea-container{
+                width: auto !important;
+                position: static !important;
+            }
         }
     }
     
