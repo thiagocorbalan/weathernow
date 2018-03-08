@@ -7,4 +7,4 @@ export const CLASS_WEA_SPINNER  = "wea-card--status-spinner";
 export const CLASS_TEMP_HOT     = "wea-card__temp--status-hot";
 export const CLASS_TEMP_COLD    = "wea-card__temp--status-cold";
 export const TIME_EXPIRE_CACHE  = 10; // 10 minutes
-export const TIME_UPDATE_WEATHER  = 15000; // 10 minutes
+export const TIME_UPDATE_WEATHER  = 600000; // 10 minutes
