@@ -1,6 +1,6 @@
 import { TempModel } from "./Temp.model";
 import { CoordModel } from "./Coord.Model";
-import { WeatherModel } from "./weather.model";
+import { WeatherModel } from "./Weather.model";
 import { SysModel } from "./Sys.Model";
 import { CloudsModel } from "./Clouds.Model";
 

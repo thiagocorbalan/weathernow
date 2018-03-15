@@ -1,6 +1,6 @@
 import { CLASS_TEMP_HOT, CLASS_TEMP_COLD, CLASS_WEA_SPINNER, CLASS_WEA_ERROR } from "../Helpers/Constants";
 import { WeaView } from "../Views/Weather.view";
-import { ListWeathers } from "../Models/listWeathers.model";
+import { ListWeathers } from "../Models/ListWeathers.model";
 import { WeatherModel } from "../Models/Weather.model";
 import { WeatherInterface } from "./Weather.interface";
 import { WeatherResultModel } from "../Models/WeatherResult.model";

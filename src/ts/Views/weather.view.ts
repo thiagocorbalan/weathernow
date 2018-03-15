@@ -1,11 +1,11 @@
-import {WeatherService} from '../Services/weather.service';
-import { CLASS_WEA_ACTIVE, CLASS_WEA_SPINNER } from '../Helpers/Constants';
-import { WeatherModel } from '../Models/Weather.model';
-import { ListWeathers } from '../Models/listWeathers.model';
-import { WeatherResultModel } from '../Models/WeatherResult.model';
-import { ApiInterface } from '../Services/api.interface';
-import { ApiService } from '../Services/api.service';
-import { CacheService } from '../Services/Cache.service';
+import {WeatherService}                         from '../Services/Weather.service';
+import { CLASS_WEA_ACTIVE, CLASS_WEA_SPINNER }  from '../Helpers/Constants';
+import { WeatherModel }                         from '../Models/Weather.model';
+import { ListWeathers }                         from '../Models/ListWeathers.model';
+import { WeatherResultModel }                   from '../Models/WeatherResult.model';
+import { ApiInterface }                         from '../Services/Api.interface';
+import { ApiService }                           from '../Services/Api.service';
+import { CacheService }                         from '../Services/Cache.service';
 
 export abstract class WeaView{
     

@@ -1,6 +1,6 @@
-import { API_APPID, API_BASE_URL } from '../Helpers/constants';
+import { API_APPID, API_BASE_URL } from '../Helpers/Constants';
 import { Weather } from '../Models/weather';
-import { ApiInterface } from './api.interface';
+import { ApiInterface } from './Api.interface';
 
 export class ApiService implements ApiInterface{
 

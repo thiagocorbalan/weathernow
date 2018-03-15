@@ -1,5 +1,5 @@
-import { WeatherController } from './Constrollers/weather.controller';
-import { ListWeathers } from './Models/listWeathers.model';
+import { WeatherController } from './Constrollers/Weather.controller';
+import { ListWeathers } from './Models/ListWeathers.model';
 
 let weaController = new WeatherController();
 let $ = document.querySelector.bind(document);

@@ -1,9 +1,9 @@
 import { CLASS_WEA_ERROR, TIME_UPDATE_WEATHER } from '../Helpers/Constants';
 import { WeatherInterface } from '../Services/Weather.interface';
 import { WeatherService } from '../Services/Weather.service';
-import { ApiService } from './../Services/api.service';
+import { ApiService } from './../Services/Api.service';
 import { WeaView } from './../Views/Weather.view';
-import { ListWeathers } from './listWeathers.model';
+import { ListWeathers } from './ListWeathers.model';
 import { CacheService } from '../Services/Cache.service';
 import { CacheInterface } from '../Services/Cache.interface';
 import { WeatherModel } from './Weather.model';

@@ -29,7 +29,7 @@ const path = {
 }
 
 // BrowserSync
-gulp.task('browserSync', function() {
+gulp.task('browser-sync', function() {
     browserSync.init({
       server: { baseDir: 'dist'},
     })
@@ -51,7 +51,7 @@ gulp.task('sass', function () {
 });
 
 // Wacth
-gulp.task('watch', ['browserSync', 'sass'], function (){
+gulp.task('watch', ['browser-sync', 'sass'], function (){
     gulp.watch(path.SRC_SASS, ['sass']);
     gulp.watch(path.SRC_TS, ['ts']);
     gulp.watch(`${path.SRC_INDEX}/index.html`,['html']);
@@ -109,5 +109,6 @@ gulp.task("html", function(){
 });
 
 
-gulp.task('start',['html','images','sass','ts','fonts','watch']);
+gulp.task('start',['html','images','sass','ts','fonts']);
 gulp.task('start:dev',['start','watch']);
+gulp.task('start:prod',['start','browser-sync']);
