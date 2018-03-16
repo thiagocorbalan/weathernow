@@ -1,8 +1,8 @@
-import { WeatherController } from './Constrollers/Weather.controller';
-import { DomWeatherController } from './Constrollers/DomWeather.controller';
-import { ListWeathers } from './Models/ListWeathers.model';
+import { WeatherController } from './../Constrollers/Weather.controller';
+import { DomWeatherController } from './../Constrollers/DomWeather.controller';
+import { ListWeathers } from './../Models/ListWeathers.model';
 
-class App {
+export class AppController {
     private weaController;
     private divHeaderHeight;
     private divFormAdd;
@@ -24,12 +24,16 @@ class App {
             DomWeatherController.calculateWidthContainer(ListWeathers.itens);
             this.calcDivMainContent();
         });
+
+        this.formAdd();
         
     }
 
     
-    private startFormAdd(){
+    public formAdd(){
+        
         this.divFormAdd.onsubmit = (ev)=>{
+            console.log('');
             ev.preventDefault();
             var textField = this.selectElement('input[name=textField]');
             if(textField.value != ''){
@@ -47,8 +51,6 @@ class App {
         this.divMainContent.style.minHeight = `${window.innerHeight - (this.divHeaderHeight + this.divFormAddHeight)}px`;
     }
 }
-
-let app = new App();
     
     
-    
+var appController = new AppController();

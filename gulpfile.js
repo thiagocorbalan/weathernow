@@ -25,7 +25,7 @@ const path = {
     SRC_IMG:    './src/assets/images',
     SRC_FONTS:  './src/assets/fonts',
     ENTRY_SASS: './src/assets/sass/weather.scss',
-    ENTRY_TS:   './src/ts/App.ts'
+    ENTRY_TS:   './src/ts/Constrollers/App.controller.ts'
 }
 
 // BrowserSync
