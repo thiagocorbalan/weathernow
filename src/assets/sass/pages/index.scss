@@ -12,12 +12,13 @@
         display: flex;
         align-content: center;
         align-items: center;
-        justify-content: left;
+        justify-content: center;
         min-height: 600px;
         text-align: center;
         padding: 30px;
-        top: 54px;
         height: calc(100% - 134px);
+        position: relative;
+        overflow-x: scroll;
         
         @media (max-width: $screen-sm){
             min-height: auto;
@@ -32,7 +33,9 @@
     .wea-search{
         display: block;
         position: fixed;
-        bottom: 20px;
+        bottom: 0;
+        padding: 20px;
+        background-color: $color-gray-30;
         text-align: center;
         width: 100%;
 
@@ -40,12 +43,14 @@
             box-shadow: none;
             border: 0;
             font-size: 22px; 
-            padding: 10px;
+            padding: 10px 20px;
+            width: 60%;
+            max-width: 340px;
             margin-right: 20px;
             border: 10px solid rgba($color-gray-10,.3);
 
             @include transition(all .1s linear);            
-            @include border-radius(10px);
+            @include border-radius(50px);
             &:focus{
                 border-color: rgba($color-gray-50,.3);
                 outline: none;

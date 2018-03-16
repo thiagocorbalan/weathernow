@@ -1,5 +1,4 @@
 import { CacheService } from '../Services/Cache.service';
-import { WeatherModel } from './Weather.model';
 import { WeatherResultModel } from './WeatherResult.model';
 
 export abstract class ListWeathers{

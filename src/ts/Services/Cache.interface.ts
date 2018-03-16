@@ -1,4 +1,4 @@
-import { WeatherResultModel } from "../Models/WeatherResult.model";
+import { WeatherResultModel } from '../Models/WeatherResult.model';
 
 export interface CacheInterface{
     add(key:string,model:WeatherResultModel);

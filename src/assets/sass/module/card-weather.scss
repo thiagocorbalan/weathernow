@@ -158,8 +158,14 @@
     }
 
     @media (max-width: $screen-xs){
-        margin: 0 10px 30px;
-        
+        margin: 0 10px 30px;        
+    }
+
+    @media (max-width: $screen-sm){
+        .wea-card__data{
+            height: 55px; 
+            opacity: 1;
+        } 
     }
 }  
  

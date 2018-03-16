@@ -8,4 +8,5 @@ export interface WeatherInterface{
     addSpinner(model:WeatherResultModel):void;
     addMessageError(model:WeatherResultModel):void;
     removeMessageError(model:WeatherResultModel):void;
+    update(model: Array<WeatherResultModel>);
 }

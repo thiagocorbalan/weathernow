@@ -1,8 +1,6 @@
-import { WeatherResultModel } from '../Models/WeatherResult.model';
+import { TIME_EXPIRE_CACHE } from './../Helpers/Constants';
+import { WeatherResultModel } from './../Models/WeatherResult.model';
 import { CacheInterface } from './Cache.interface';
-import { TIME_EXPIRE_CACHE } from '../Helpers/Constants';
-import { TextHelper } from '../Helpers/TextHelper';
-import { WeatherModel } from '../Models/Weather.model';
 
 export class CacheService implements CacheInterface{
 
@@ -13,7 +11,7 @@ export class CacheService implements CacheInterface{
     public add(key:string,model:WeatherResultModel){
         var dateTime = new Date();
         model.dateExpire = dateTime.setMinutes(dateTime.getMinutes()+TIME_EXPIRE_CACHE); //TIME_EXPIRE
-        model.dateUpdate = new Date().toLocaleString();
+        model.dateUpdate = new Date().toString();
         model.keyCache = key;
         localStorage.setItem(key, JSON.stringify(model));
     }

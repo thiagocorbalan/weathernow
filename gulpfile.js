@@ -81,10 +81,10 @@ gulp.task('ts', function()
 		.bundle()
 		.pipe(source('App.js'))
         .pipe(buffer())
-        // .pipe(uglify({
-        //     toplevel: false,
-        //     ie8: true
-        // }))
+        .pipe(uglify({
+            toplevel: false,
+            ie8: true
+        }))
         .pipe(gulp.dest(path.DIST_JS))
         .pipe(browserSync.reload({
             stream: true

@@ -1,7 +1,6 @@
 import { Weather } from '../Models/Weather';
-import { WeaView } from '../Views/Weather.view';
-import { CacheService } from '../Services/Cache.service';
-import { ListWeathers } from '../Models/ListWeathers.model';
+import { ListWeathers } from './../Models/ListWeathers.model';
+import { CacheService } from './../Services/Cache.service';
 
 export class WeatherController{
     private __cacheService = new CacheService();

@@ -1,8 +1,7 @@
-import { TempModel } from "./Temp.model";
-import { CoordModel } from "./Coord.Model";
-import { WeatherModel } from "./Weather.model";
-import { SysModel } from "./Sys.Model";
-import { CloudsModel } from "./Clouds.Model";
+import { CloudsModel } from './Clouds.Model';
+import { CoordModel } from './Coord.Model';
+import { SysModel } from './Sys.Model';
+import { TempModel } from './Temp.model';
 
 export class WeatherResultModel{
     cod:(number|string);

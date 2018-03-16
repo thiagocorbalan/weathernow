@@ -1,9 +1,9 @@
-import { CLASS_TEMP_HOT, CLASS_TEMP_COLD, CLASS_WEA_SPINNER, CLASS_WEA_ERROR } from "../Helpers/Constants";
-import { WeaView } from "../Views/Weather.view";
-import { ListWeathers } from "../Models/ListWeathers.model";
-import { WeatherModel } from "../Models/Weather.model";
-import { WeatherInterface } from "./Weather.interface";
-import { WeatherResultModel } from "../Models/WeatherResult.model";
+import { CLASS_TEMP_COLD, CLASS_TEMP_HOT, CLASS_WEA_ERROR, CLASS_WEA_SPINNER } from './../Helpers/Constants';
+import { ListWeathers } from './../Models/ListWeathers.model';
+import { WeatherResultModel } from './../Models/WeatherResult.model';
+import { WeaView } from './../Views/Weather.view';
+import { WeatherInterface } from './Weather.interface';
+import { DomWeatherController } from '../Constrollers/DomWeather.controller';
 
 export class WeatherService implements WeatherInterface{
 
@@ -40,7 +40,7 @@ export class WeatherService implements WeatherInterface{
     */
     public addSpinner(model:WeatherResultModel){
         model.cssClassStatus = CLASS_WEA_SPINNER;
-        WeaView.update(ListWeathers.itens);
+        this.update(ListWeathers.itens);
     }
 
     /** 
@@ -48,15 +48,32 @@ export class WeatherService implements WeatherInterface{
     */
     public removeSpinner(model:WeatherResultModel){
         model.cssClassStatus = '';
-        WeaView.update(ListWeathers.itens);
+        this.update(ListWeathers.itens);
     }
 
+    /**
+     * 
+     * @param model 
+     */
     public addMessageError(model:WeatherResultModel){
         model.cssClassStatusError = CLASS_WEA_ERROR;
-        WeaView.update(ListWeathers.itens);
+        this.update(ListWeathers.itens);
     }
+
+    /**
+     * 
+     * @param model 
+     */
     public removeMessageError(model:WeatherResultModel){
         model.cssClassStatusError = '';
-        WeaView.update(ListWeathers.itens);
+        this.update(ListWeathers.itens);
+    }
+
+    public update(model: Array<WeatherResultModel>){
+        WeaView.update(model);
+        DomWeatherController.calculateWidthContainer(model);
+        DomWeatherController.applyClicks(model);
+        DomWeatherController.applyClickTryAgain(model);
+
     }
 }
