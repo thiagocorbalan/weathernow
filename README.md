@@ -10,7 +10,7 @@ A weather app that show weather from various cities. Initially there are  three 
 
 ## How to run
 1. Create a new folder in Desktop.
-1. Open the prompt command windows (CMD) or PowerShell on folder created and run the command "`git clone htpps://github.com/thiagocorbalan/weathernow .`. Or do you prefer get download the project".
+1. Open the prompt command windows (CMD) or PowerShell and navigate at folder created and run the command "`git clone htpps://github.com/thiagocorbalan/weathernow .`. Or do you prefer get download the project".
 1. Run the command `npm start` on a Prompt Command Window to install all needed packages. This command will automatically initialize the App.
    
 ## Built With
