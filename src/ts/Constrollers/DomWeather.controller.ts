@@ -44,6 +44,8 @@ export abstract class DomWeatherController {
                 }
                 mainContent.style.justifyContent = 'left';
             }
+        }else{
+            mainContent.style.justifyContent = 'center';
         }
 
         if(DEBUG_CONTROL){
