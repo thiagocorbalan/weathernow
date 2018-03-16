@@ -1,4 +1,4 @@
-# WeatherNow App
+# WEATHER NOW APP
 
 A weather app that show weather from various cities. Initially there are  three  preloaded cities: **Urubici-BR**, **Nairobi-KE** and **Nuuk-GL**.
 
@@ -9,7 +9,8 @@ A weather app that show weather from various cities. Initially there are  three 
 * [Google Chrome](https://www.google.com.br/intl/pt-BR/chrome/)
 
 ## How to run
-1. First download the project.
+1. Create a new folder in Desktop.
+1. Open the prompt command windows (CMD) or PowerShell on folder created and run the command "`git clone htpps://github.com/thiagocorbalan/weathernow .`. Or do you prefer get download the project".
 1. Run the command `npm start` on a Prompt Command Window to install all needed packages. This command will automatically initialize the App.
    
 ## Built With
@@ -23,4 +24,4 @@ A weather app that show weather from various cities. Initially there are  three 
 
 * Field to add weather conditions from more cities.
 
-### Thank's :) 
+### Thank's :)  
